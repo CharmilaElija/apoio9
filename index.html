@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rede de Apoio Seguro - Moçambique</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#7a4a9e;--rosa:#ffd6e8;--rosa-claro:#fff0f6;--roxo-claro:#e8d5f2}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--rosa-claro);color:#4a2c5a}
+.capa{width:100%;height:320px;background:linear-gradient(rgba(122,74,158,0.4),rgba(255,214,232,0.5)), url('IMG_9467.jpeg');background-size:cover;background-position:center top;display:flex;align-items:center;justify-content:center;flex-direction:column;color:white;text-align:center}
+.capa h1{font-size:26px;text-shadow:0 2px 10px rgba(0,0,0,0.5)}.capa h2{font-size:11px;margin-top:10px;background:white;color:#7a4a9e;padding:8px 18px;border-radius:25px;font-weight:700}
+.container{max-width:530px;margin:-25px auto 20px;padding:0 14px}
+.card{background:white;margin:12px 0;padding:18px;border-radius:18px;box-shadow:0 6px 20px rgba(122,74,158,0.12);border:1px solid #ffd6e8}
+.card h3{color:var(--roxo);margin-bottom:8px;font-size:14px}
+.btn{border:none;padding:13px;border-radius:30px;width:100%;font-weight:700;cursor:pointer;font-size:13px}
+.btn-roxo{background:linear-gradient(135deg,#b185c8,#7a4a9e);color:white}
+.btn-verde{background:linear-gradient(135deg,#25D366,#128C7E);color:white}
+.btn-branco{background:white;color:#7a4a9e;border:1.5px solid #7a4a9e}
+select,input{width:100%;padding:12px;margin:6px 0;border-radius:12px;border:1.5px solid #e8d5f2;font-family:'Poppins';background:#fefcff;font-size:13px}
+.voluntaria-card{border:1.5px solid #e8d5f2;padding:12px;margin:8px 0;border-radius:12px;background:#fefcff;font-size:12px}
+.badge{color:white;padding:3px 9px;border-radius:12px;font-size:10px;font-weight:700}
+.badge-prov{background:var(--roxo)}.badge-pend{background:orange}
+.caso-card{background:linear-gradient(135deg,#f3e5f5,#fff0f6);padding:10px;margin:7px 0;border-radius:10px;border-left:4px solid #7a4a9e;font-size:11px}
+footer{text-align:center;padding:15px;font-size:10px;color:#b185c8}
+.link-grupo{background:#25D366;color:white;padding:10px 14px;border-radius:20px;text-decoration:none;display:inline-block;font-size:11px;margin:6px 0}
+</style>
+</head>
+<body>
+<div class="capa"><h1>🌸 Rede de Apoio Seguro</h1><h2>✨ Moçambique inteiro - Estás segura aqui ✨</h2></div>
+<div class="container">
+
+<!-- 1. PEDIDO DE AJUDA -->
+<div class="card">
+<h3>💜 Precisas de apoio urgente? Moçambique</h3>
+<select id="provVitima"><option>Nampula</option><option>Maputo Cidade</option><option>Maputo Província</option><option>Gaza</option><option>Inhambane</option><option>Sofala</option><option>Manica</option><option>Tete</option><option>Zambézia</option><option>Cabo Delgado</option><option>Niassa</option></select>
+<select id="tipoAjuda"><option>Violência Física</option><option>Violência Psicológica</option><option>Risco de Feminicídio</option><option>Depressão / Ansiedade</option><option>Apoio Jurídico</option><option>Abrigo</option><option>Apoio Comunitário</option></select>
+<input type="text" id="bairroVitima" placeholder="Teu bairro/distrito ex: Muhaivire">
+<button class="btn btn-roxo" onclick="pedirAjuda()">💜 VER ANJOS PRÓXIMOS</button>
+</div>
+
+<div class="card" id="resultado" style="display:none">
+<h3>🚨 Anjos disponíveis - Envia para o GRUPO CENTRAL</h3>
+<div id="listaAjudantes"></div>
+<div style="margin-top:12px;padding:12px;background:#f0fff4;border-radius:12px;border:1px solid #25D366">
+<p style="font-size:11px;font-weight:600">📢 Teu pedido vai cair no nosso Grupo Central de Anjos:</p>
+<a href="https://chat.whatsapp.com/GlXSU3agEAU5RZzj3FidR2?mode=gi_t" target="_blank" class="link-grupo">💬 Entrar no Grupo Central</a><br>
+<button class="btn btn-verde" onclick="enviarParaGrupo()" style="margin-top:8px">🚨 ENVIAR PEDIDO PARA O GRUPO AGORA</button>
+<small style="font-size:9px;display:block;margin-top:6px">Ao clicar, o WhatsApp abre com mensagem pronta, escolhe o grupo "Rede de Apoio"</small>
+</div>
+</div>
+
+<!-- 2. QUERO SER ANJO -->
+<div class="card" style="background:linear-gradient(135deg,#e8d5f2,#ffd6e8)">
+<h3>🤝 Quero ser Anjo - Voluntária</h3>
+<input type="text" id="nomeNovo" placeholder="Teu nome completo">
+<input type="tel" id="telNovo" placeholder="Teu WhatsApp ex: 84xxxxxxx">
+<select id="provNovo"><option value="">Tua província</option><option>Maputo Cidade</option><option>Maputo Província</option><option>Gaza</option><option>Inhambane</option><option>Sofala</option><option>Manica</option><option>Tete</option><option>Zambézia</option><option>Nampula</option><option>Cabo Delgado</option><option>Niassa</option></select>
+<input type="text" id="bairroNovo" placeholder="Bairro/Distrito ex: Muhaivire">
+<select id="skillNovo"><option>Apoio Comunitário</option><option>Apoio Jurídico</option><option>Apoio Psicológico</option><option>Abrigo Temporário</option><option>Acompanhamento Hospital/Esquadra</option></select>
+<button class="btn btn-branco" onclick="pedirParaSerAnjo()">💜 Enviar pedido para Grupo + 850730250</button>
+</div>
+
+<!-- 3. ANJOS -->
+<div class="card">
+<h3>💗 Nossos Anjos Aprovados (<span id="totalAnjos">0</span>)</h3>
+<div id="listaAnjosAprovados"></div>
+<a href="https://chat.whatsapp.com/GlXSU3agEAU5RZzj3FidR2?mode=gi_t" target="_blank" class="link-grupo">💬 Link do Grupo Central de Anjos</a>
+</div>
+
+<!-- 4. CASOS -->
+<div class="card" style="background:linear-gradient(135deg,#e8d5f2,#ffd6e8)">
+<h3>📊 Casos que já atendemos</h3>
+<div style="display:flex;gap:8px;text-align:center;margin:10px 0">
+<div style="flex:1;background:white;padding:10px;border-radius:12px"><b style="font-size:18px;color:#7a4a9e">47</b><br><small>mulheres</small></div>
+<div style="flex:1;background:white;padding:10px;border-radius:12px"><b style="font-size:18px;color:#7a4a9e" id="totalAnjos2">2</b><br><small>Anjos</small></div>
+<div style="flex:1;background:white;padding:10px;border-radius:12px"><b style="font-size:18px;color:#7a4a9e">11</b><br><small>províncias</small></div>
+</div>
+<div id="listaCasos">
+<div class="caso-card">✅ <b>Nampula - Muhaivire:</b> Apoio jurídico - Fev/2026</div>
+<div class="caso-card">✅ <b>Maputo:</b> Abrigo seguro - Jan/2026</div>
+<div class="caso-card">✅ <b>Zambézia:</b> Acompanhamento esquadra - Jan/2026</div>
+</div>
+</div>
+
+<!-- PAINEL ADMIN -->
+<div class="card" id="painelAdmin" style="display:none;border:2px dashed #7a4a9e;background:#fcf8ff">
+<h3>🔐 PAINEL ADMIN - Charmila 850730250</h3>
+<div id="statsAdmin" style="background:white;padding:8px;border-radius:10px;font-size:11px;margin:8px 0"></div>
+<div id="listaPendentes"></div>
+<button class="btn btn-roxo" onclick="verPendentes()" style="margin-top:8px;font-size:11px">⏳ Ver Pendentes</button>
+</div>
+
+</div>
+<footer>Rede Apoio Seguro MZ • Admin 850730250 💜<br>Grupo: chat.whatsapp.com/GlXSU3agEAU5RZzj3FidR2</footer>
+
+<script>
+const GRUPO_LINK = "https://chat.whatsapp.com/GlXSU3agEAU5RZzj3FidR2?mode=gi_t";
+const ADMIN_TEL = "258850730250";
+
+let anjosAprovados = JSON.parse(localStorage.getItem('anjosAprovadosFinal')) || [
+{nome:"Charmila Elija - Administradora", prov:"Nampula", bairro:"Muhaivire", tel:"258850730250", skill:"Coordenação e Apoio Jurídico - 850730250"},
+{nome:"Charmila Elija - Voluntária Muhaivire", prov:"Nampula", bairro:"Muhaivire", tel:"258850730250", skill:"Apoio Comunitário - 850730250"}
+]);
+let pendentes = JSON.parse(localStorage.getItem('anjosPendentesFinal')) || [];
+let ultimoPedido = null;
+
+function mostrarAnjosAprovados(){
+let html=""; anjosAprovados.forEach(a=>{html+=`<div class="voluntaria-card"><b>${a.nome}</b> - ${a.prov}<br><small>📍 ${a.bairro} • ${a.skill}</small><br><small>📞 ${a.tel}</small></div>`;});
+document.getElementById('listaAnjosAprovados').innerHTML=html;
+document.getElementById('totalAnjos').innerText=anjosAprovados.length;
+document.getElementById('totalAnjos2').innerText=anjosAprovados.length;
+}
+mostrarAnjosAprovados();
+
+function pedirAjuda(){
+let prov=document.getElementById('provVitima').value;
+let tipo=document.getElementById('tipoAjuda').value;
+let bairro=document.getElementById('bairroVitima').value || "Não informado";
+ultimoPedido={prov,tipo,bairro,data:new Date().toLocaleString()};
+document.getElementById('resultado').style.display='block';
+let lista = anjosAprovados.filter(a=>a.prov===prov); if(lista.length===0) lista=anjosAprovados;
+let html=`<small>Encontramos ${lista.length} Anjos para ${prov} - ${bairro}</small><br><br>`;
+lista.forEach(a=>{html+=`<div class="voluntaria-card"><b>${a.nome}</b> - ${a.prov}<br><small>${a.bairro} • ${a.skill}</small><br><a href="https://wa.me/${a.tel}?text=Olá%20preciso%20de%20${tipo}%20em%20${prov}" style="background:#7a4a9e;color:white;padding:7px 12px;border-radius:20px;text-decoration:none;display:inline-block;margin-top:5px;font-size:11px">💬 Falar com ela (850730250)</a></div>`;});
+document.getElementById('listaAjudantes').innerHTML=html;
+window.scrollTo(0, document.getElementById('resultado').offsetTop);
+}
+
+function enviarParaGrupo(){
+if(!ultimoPedido){alert("Preenche primeiro o pedido");return;}
+let msg=`🚨 *PEDIDO DE AJUDA - REDE DE APOIO SEGURO MZ* 🚨%0A%0A📍 *Província:* ${ultimoPedido.prov}%0A🏠 *Bairro:* ${ultimoPedido.bairro}%0A💔 *Tipo:* ${ultimoPedido.tipo}%0A🕐 *Data:* ${ultimoPedido.data}%0A%0A⚠️ *Algum Anjo disponível para apoiar?*%0A%0A_Responda neste grupo: Quem pode atender?_%0A%0A👩‍💼 Admin: Charmila 850730250`;
+// Abre tela de compartilhar para a vítima escolher o grupo central
+window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+// Também abre o link do grupo caso ela ainda não esteja no grupo
+setTimeout(()=>{window.open(GRUPO_LINK,'_blank');},1500);
+}
+
+function pedirParaSerAnjo(){
+let nome=document.getElementById('nomeNovo').value.trim();
+let tel=document.getElementById('telNovo').value.trim();
+let prov=document.getElementById('provNovo').value;
+let bairro=document.getElementById('bairroNovo').value.trim()||prov;
+let skill=document.getElementById('skillNovo').value;
+if(!nome||!tel||!prov){alert("Preenche nome, WhatsApp e província");return;}
+let telLimpo=tel.replace(/[^0-9]/g,''); if(!telLimpo.startsWith('258')) telLimpo='258'+telLimpo;
+let novo={nome,tel:telLimpo,prov,bairro,skill,data:new Date().toLocaleDateString()};
+pendentes.push(novo);
+localStorage.setItem('anjosPendentesFinal',JSON.stringify(pendentes));
+let msg=`*NOVO PEDIDO DE ANJO* 💜%0A%0A👤 Nome: ${nome}%0A📞 Tel: ${telLimpo}%0A📍 Prov: ${prov}%0A🏠 Bairro: ${bairro}%0A💗 Tipo: ${skill}%0A%0A✅ Aprovar: teu-link.tiiny.site/?admin=850730250%0A%0ALink Grupo: ${GRUPO_LINK}`;
+window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+setTimeout(()=>{window.open(`https://wa.me/${ADMIN_TEL}?text=${msg}`,'_blank');},800);
+alert(`Obrigada ${nome}! Pedido enviado para Grupo Central + 850730250`);
+document.getElementById('nomeNovo').value="";document.getElementById('telNovo').value="";document.getElementById('bairroNovo').value="";
+}
+
+if(window.location.search.includes('admin=850730250')){
+document.getElementById('painelAdmin').style.display='block';
+verPendentes();
+}
+function verPendentes(){
+document.getElementById('statsAdmin').innerHTML=`Anjos: ${anjosAprovados.length} | Pendentes: ${pendentes.length} | Grupo: ${GRUPO_LINK}`;
+let html=""; if(pendentes.length===0) html="<small style='color:green'>✅ Nenhum pendente</small>";
+pendentes.forEach((p,i)=>{
+html+=`<div class="voluntaria-card" style="border-left:4px solid orange"><b>${p.nome}</b><br><small>📞 ${p.tel} • ${p.prov} - ${p.bairro} • ${p.skill}</small><br><button onclick="aprovarAnjo(${i})" style="background:#7a4a9e;color:white;border:none;padding:8px 14px;border-radius:20px;margin-top:6px">✅ Aprovar</button> <button onclick="rejeitarAnjo(${i})" style="background:#ff6b6b;color:white;border:none;padding:8px 12px;border-radius:20px">❌</button></div>`;
+});
+document.getElementById('listaPendentes').innerHTML=html;
+}
+function aprovarAnjo(i){
+let a=pendentes.splice(i,1)[0]; anjosAprovados.push(a);
+localStorage.setItem('anjosAprovadosFinal',JSON.stringify(anjosAprovados));
+localStorage.setItem('anjosPendentesFinal',JSON.stringify(pendentes));
+let msgOk=`Parabéns ${a.nome}! 💜 Foste APROVADA como Anjo ${a.prov} pela Charmila 850730250. Entra no Grupo Central: ${GRUPO_LINK}`;
+window.open(`https://wa.me/${a.tel}?text=${encodeURIComponent(msgOk)}`,'_blank');
+mostrarAnjosAprovados();verPendentes();
+}
+function rejeitarAnjo(i){pendentes.splice(i,1);localStorage.setItem('anjosPendentesFinal',JSON.stringify(pendentes));verPendentes();}
+</script>
+</body>
+</html>
